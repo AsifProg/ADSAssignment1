@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+        {% load static %}
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+<link rel="stylesheet" href="{% static 'css/contact.css' %}">
+</head>
+<body>
+ <header>
+        <div class="logo">
+           <a href="#"class="mylogo">GPD</a>
+        </div>
+        <nav>
+          <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+            <a class="nav-link" href="http://127.0.0.1:8000/records">Records</a>
+        </nav>
+    </header>
+<div class="container">
+  <form  id="records"
+  method="POST" action="{% url 'addrecord' %}" >
+      {%csrf_token%}
+    <h3>Add Record</h3>
+      <fieldset>
+      <input placeholder="Your id" type="text" name ="recordid" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input placeholder="Your first name" type="text" name ="fname" tabindex="2" required autofocus>
+    </fieldset>
+  <fieldset>
+      <input placeholder="Your last name" type="text" name ="lname" tabindex="3" required autofocus>
+    </fieldset>
+    <fieldset>
+      <button name="submit" type="submit" id="record-submit" data-submit="...Sending">Submit</button>
+    </fieldset>
+  </form>
+</div>
+</body>
+</html>
