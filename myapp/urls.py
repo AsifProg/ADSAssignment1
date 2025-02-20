@@ -8,6 +8,6 @@ urlpatterns = [
     #path("readrecord/", views.show_record,name="showrecord"),
     path("createrecord/", add_record,name="createrecord"),
     #path("deleterecord/", record_list,name="record_list"),
-    path('deleterecord/<int:record_id>/', delete_record, name='deleterecord'),
-    path('updaterecord/<int:record_id>/', update_record, name='updaterecord'),
+    path('deleterecord/<int:id>/', delete_record, name='deleterecord'),
+    path('updaterecord/<int:id>/', update_record, name='updaterecord'),
 ]

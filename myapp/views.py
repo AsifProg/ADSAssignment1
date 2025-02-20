@@ -1,7 +1,7 @@
 from django.shortcuts import render,HttpResponse, get_object_or_404, redirect
 
 from .models import Records
-
+from .forms import RecordForm
 
 
 def home(request):
@@ -22,18 +22,19 @@ def add_record(request):
     return redirect('home')
     #return render (request,'myapp/homepage.html')
 
-def delete_record(request, record_id):
-    record = get_object_or_404(Records, id=record_id)
-    record.delete()
+def delete_record(request, id):
+    record = Records.objects.get(id=id)
+    if request.method == "POST":
+        record.delete()
+    #record = get_object_or_404(Records, id=record_id)
     return redirect('home')
-def update_record(request, record_id):
-    record = get_object_or_404(Records, id=record_id)
+def update_record(request, id):
+    record = get_object_or_404(Records, id=id)
     if request.method == 'POST':
-        form = Records(request.POST, instance=record)  # Bind existing data
+        form = RecordForm(request.POST, instance=record)
         if form.is_valid():
-            form.save()  # Save updated data
-            return redirect('home')  # Redirect to list page
+            form.save()
+            return redirect('home')
     else:
-        form = Records(instance=record)  # Pre-fill form with existing data
-
-    return render(request, 'update_record.html', {'form': form})
+        form = RecordForm(instance=record)
+    return render(request, 'myapp/form.html', {'form': form})
